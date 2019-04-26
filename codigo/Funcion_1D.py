@@ -1,10 +1,11 @@
-from  statistics import *
+from statistics import *
 
 """
     verifica los tipos de dato de una columna para saber que proceso usar
     sea moda[mode], media[mean], desviacion estandar[stdev], mediana[median]
 """
-def TipoDatos(_csv):
+def TipoDatos(_csv, _Arch):
+    a="\n"
     i=0
     name = _csv.columns.values  # se obiene nombre de las columnas
     while i in range(len(name)):
@@ -13,30 +14,31 @@ def TipoDatos(_csv):
             if _csv[name[i]].dtypes == 'Int64':
                 if len(_csv[name[i]].unique()) == 2:
                     try:
-                        print("la moda de ", name[i], "es: ", mode(_csv[name[i]]))
+                        _Arch.write("la moda de "+name[i]+"es: "+str(mode(_csv[name[i]]))+"\n")
                     except StatisticsError:
-                        print("No unique mode found")
+                        _Arch.write("No unique mode found\n")
                         pass
                 else:
                     try:
-                        print("la media de ", name[i], "es: ", mean(_csv[name[i]]))
-                        print("la moda de ", name[i], "es: ", mode(_csv[name[i]]))
-                        print("la desviacion estandar de ", name[i], "es: ", stdev(_csv[name[i]]))
-                        print("la mediana de ", name[i], "es: ", median(_csv[name[i]]))
+                        _Arch.write("la media de "+name[i]+"es: "+str(mean(_csv[name[i]]))+"\n")
+                        _Arch.write("la moda de "+name[i]+"es: "+str(mode(_csv[name[i]]))+"\n")
+                        _Arch.write("la desviacion estandar de "+name[i]+"es: "+str(stdev(_csv[name[i]]))+"\n")
+                        _Arch.write("la mediana de "+name[i]+"es: "+str(median(_csv[name[i]]))+"\n")
                     except StatisticsError:
-                        print("No unique found")
+                        _Arch.write(str(name[i])+" No unique found\n")
             #si es columna flotante se sacara moda y media
             elif _csv[name[i]].dtypes == 'Float64':
                 try:
-                    print("la media de ", name[i], "es: ", mean(_csv[name[i]]))
-                    print("la moda de ", name[i], "es: ", mode(_csv[name[i]]))
-                    print("la desviacion estandar de ", name[i], "es: ", stdev(_csv[name[i]]))
-                    print("la mediana de ", name[i], "es: ", median(_csv[name[i]]))
+                    _Arch.write("la media de "+name[i]+"es: "+str(mean(_csv[name[i]]))+"\n")
+                    _Arch.write("la moda de "+name[i]+"es: "+str(mode(_csv[name[i]]))+"\n")
+                    _Arch.write("la desviacion estandar de "+name[i]+"es: "+str(stdev(_csv[name[i]]))+"\n")
+                    _Arch.write("la mediana de "+name[i]+"es: "+str(median(_csv[name[i]]))+"\n")
                 except StatisticsError:
-                    print("No unique found")
+                    _Arch.write(name[i]+"No unique found\n")
                     pass
             #en caso contrario
             else:
                 i = i + 1
                 continue
         i = i + 1
+    return a

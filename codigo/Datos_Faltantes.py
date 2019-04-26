@@ -1,21 +1,22 @@
 #detecta que columna del archivo le faltan datos
-def DetectarColumna(_csv):
-    faltante=0
+def DetectarColumna(_csv, _Arch):
     i=0 #para moverse en las columnas
     name = _csv.columns.values #se obiene nombre de las columnas
     while i in range(len(name)):
-        #print(name[i], _csv[name[i]].isnull().any().any()) #dice si la columna le faltan datos
-        if _csv[name[i]].isnull().any().any() == True:
+        if  _csv.isnull().any().any() == True:
             i=i+1
             i=i-1
-            #print(name[i], "faltantes: ", _csv[name[i]].isnull().sum())
-            #print(name[i], "total: ", _csv[name[i]].count())
+            _Arch.write(name[i]+" faltantes: "+str(_csv[name[i]].isnull().sum())+"\n")
+            _Arch.write(name[i]+" total: "+str(_csv[name[i]].count())+"\n")
         i=i+1
 
 #verifica si le faltan datos a la tabla
-def Verificar_CSV(_csv):
+def Verificar_CSV(_csv, _Arch):
+    a ="\n"
     #condicion que se usa para buscar posteriormente que columna(s) le faltan datos
     if  _csv.isnull().any().any() == True:
-        DetectarColumna(_csv)
-    #retorna False/True dependiendo estado de las tablas
-    return _csv.isnull().any().any()
+        _Arch.write("Falta datos \n")
+        DetectarColumna(_csv, _Arch)
+    else:
+        _Arch.write("No faltan datos \n")
+    return a
