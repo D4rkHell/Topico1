@@ -4,10 +4,12 @@ def DetectarColumna(_csv):
     i=0 #para moverse en las columnas
     name = _csv.columns.values #se obiene nombre de las columnas
     while i in range(len(name)):
-        print(name[i], _csv[name[i]].isnull().any().any()) #dice si la columna le faltan datos
+        #print(name[i], _csv[name[i]].isnull().any().any()) #dice si la columna le faltan datos
         if _csv[name[i]].isnull().any().any() == True:
-            print(name[i], "faltantes: ", _csv[name[i]].isnull().sum())
-            print(name[i], "total: ", _csv[name[i]].count())
+            i=i+1
+            i=i-1
+            #print(name[i], "faltantes: ", _csv[name[i]].isnull().sum())
+            #print(name[i], "total: ", _csv[name[i]].count())
         i=i+1
 
 #verifica si le faltan datos a la tabla
