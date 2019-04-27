@@ -1,3 +1,5 @@
+import numpy as np
+
 #detecta que columna del archivo le faltan datos
 def DetectarColumna(_csv, _Arch):
     i=0 #para moverse en las columnas
@@ -20,3 +22,17 @@ def Verificar_CSV(_csv, _Arch):
     else:
         _Arch.write("No faltan datos \n")
     return a
+
+#llena con -1 datos faltantes al ser tipo numerico (este es el caso en esta db"
+def Llenar(_csv):
+    if  _csv.isnull().any().any() == True:
+        tipos = _csv.columns.to_series().groupby(_csv.dtypes).groups
+        ctext = tipos[np.dtype('object')]
+        columnas = _csv.columns  # lista de todas las columnas
+        cnum = list(set(columnas) - set(ctext))
+        for c in cnum:
+            _csv[c] = _csv[c].fillna(-1)
+
+def Eliminar(_csv):
+    return _csv.dropna(inplace=True)
+
