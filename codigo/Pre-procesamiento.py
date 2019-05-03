@@ -1,8 +1,9 @@
 import pandas as pd
 from Datos_Faltantes import *
 from Funcion_1D import *
+from Funcion_2D import *
 
-#cargar archivos csv
+# cargar archivos csv
 aisles = pd.read_csv('BD/aisles.csv', sep=',')
 departments = pd.read_csv('BD/departments.csv', sep=',')
 order_products_prior = pd.read_csv('BD/order_products__prior.csv', sep=',')
@@ -106,3 +107,36 @@ Arch_1D_Eliminados.write(str(TipoDatos(orders, Arch_1D_Eliminados)))
 Arch_1D_Eliminados.write("products: \n")
 Arch_1D_Eliminados.write(str(TipoDatos(products, Arch_1D_Eliminados)))
 Arch_1D_Eliminados.close()
+
+
+#tabla = Frecuencia(products, order_products_prior)
+
+#eliminicacion de tablas y/o columna que no se usaran
+#datos desde csv
+del order_products_prior['add_to_cart_order']
+del order_products_prior['reordered']
+del order_products_train['add_to_cart_order']
+del order_products_train['reordered']
+del aisles
+del orders
+del departments
+#datos con modificacion poniendo -1
+del aisles_1
+del departments_1
+del order_products_prior_1['add_to_cart_order']
+del order_products_prior_1['reordered']
+del order_products_train_1['add_to_cart_order']
+del order_products_train_1['reordered']
+del orders_1
+del products_1
+#datos con modificacion de eliminacion
+del aisles_eli
+del departments_eli
+del order_products_prior_eli['add_to_cart_order']
+del order_products_prior_eli['reordered']
+del order_products_train_eli['add_to_cart_order']
+del order_products_train_eli['reordered']
+del orders_eli
+del products_eli
+
+Tabla_Cont_Train = TablaContingencia(products, order_products_train)

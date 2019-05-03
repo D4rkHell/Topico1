@@ -1,5 +1,7 @@
 from statistics import *
-
+import pandas as pd
+import collections
+import numpy as np
 """
     verifica los tipos de dato de una columna para saber que proceso usar
     sea moda[mode], media[mean], desviacion estandar[stdev], mediana[median]
@@ -42,3 +44,20 @@ def TipoDatos(_csv, _Arch):
                 continue
         i = i + 1
     return a
+
+def MergeCSV(_csv1, _csv2):
+    merge_prod = pd.merge(_csv1, _csv2, on='product_id')
+    my_df = pd.DataFrame(merge_prod)
+    return my_df
+
+def Frecuencia(_product, _csv):
+    i = 1
+    table = [[], []]
+
+    while i <= len(_product["product_id"]):
+        frec = ((_csv["product_id"]) == i).sum()
+        table[i].append(i)
+        table[i].append(frec)
+        #print(frec)
+        i = i + 1
+    return table
