@@ -10,7 +10,7 @@ order_products_prior = pd.read_csv('BD/order_products__prior.csv', sep=',')
 order_products_train = pd.read_csv('BD/order_products__train.csv', sep=',')
 orders = pd.read_csv('BD/orders.csv', sep=',')
 products = pd.read_csv('BD/products.csv', sep=',')
-
+"""
 #datos faltantes = -1
 aisles_1 = aisles
 departments_1 = departments
@@ -75,6 +75,10 @@ Arch_1D_Original.write(str(TipoDatos(orders, Arch_1D_Original)))
 Arch_1D_Original.write("products: \n")
 Arch_1D_Original.write(str(TipoDatos(products, Arch_1D_Original)))
 Arch_1D_Original.close()
+Arch_No_Comprados = open('Archivos/No_Comprados', 'a')
+Arch_No_Comprados.write("No comprados \n")
+Arch_No_Comprados.write(str(NoComprados(products, order_products_train, Arch_No_Comprados)))
+Arch_No_Comprados.close()
 
 #se hacen los procesos de 1D con los datos NaN = -1
 Arch_1D_1 = open('Archivos/Archivo_1D_1', 'a')
@@ -123,20 +127,14 @@ del departments
 #datos con modificacion poniendo -1
 del aisles_1
 del departments_1
-del order_products_prior_1['add_to_cart_order']
-del order_products_prior_1['reordered']
-del order_products_train_1['add_to_cart_order']
-del order_products_train_1['reordered']
 del orders_1
 del products_1
 #datos con modificacion de eliminacion
 del aisles_eli
 del departments_eli
-del order_products_prior_eli['add_to_cart_order']
-del order_products_prior_eli['reordered']
-del order_products_train_eli['add_to_cart_order']
-del order_products_train_eli['reordered']
 del orders_eli
 del products_eli
+"""
 
-Tabla_Cont_Train = TablaContingencia(products, order_products_train)
+Tabla_Comp_Train = TablaCompra(products, order_products_train)
+TablaContingencia(Tabla_Comp_Train)

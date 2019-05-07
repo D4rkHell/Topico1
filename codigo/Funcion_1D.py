@@ -61,3 +61,14 @@ def Frecuencia(_product, _csv):
         #print(frec)
         i = i + 1
     return table
+
+def NoComprados(_productos, _order, _Archivo):
+    i=1
+    df = pd.DataFrame(_order, columns=["order_id", "product_id"])
+    df2 = pd.DataFrame(_productos, columns=["product_id", "product_name"])
+    notin = df2['product_id'].isin(df['product_id'])
+    while i in range(len(notin)):
+        _Archivo.write(str(i)+" "+str(notin[i])+"\n")
+        i=i+1
+    notinConteo = notin.value_counts()
+    _Archivo.write(str(notinConteo))
