@@ -3,12 +3,18 @@ from mlxtend.preprocessing import TransactionEncoder
 from apyori import apriori
 #from mlxtend.frequent_patterns import apriori
 
-def TablaContingencia(_csv):
-    te = TransactionEncoder()
-    te_ary = te.fit(_csv).transform(_csv)
+def Apriori(_csv, _Archivo):
+    i=0
+    #te = TransactionEncoder()
+    #te_ary = te.fit(_csv).transform(_csv)
     #df = pd.DataFrame(te_ary, columns=te.columns_)
-    association_rules = apriori(te_ary, min_support=0.0045, max_len=2)
-    print(association_rules)
+    association_rules = list(apriori(_csv, min_support=0.0045, min_confidence=0.0045, min_lift=0.0045, max_length=2))
+
+    print(len(association_rules))
+    while i < len(association_rules):
+        _Archivo.write(str(association_rules[i]) + "\n")
+        _Archivo.write("=====================================\n")
+        i=i+1
 
 def TablaCompra(_product, _csv):
     table = []
