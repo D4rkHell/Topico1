@@ -8,6 +8,9 @@ matplotlib https://matplotlib.org/users/installing.html
 
 usando python 3.X 64bits
 
+descargar dataset https://www.instacart.com/datasets/grocery-shopping-2017
+
 guardar dataset en carpeta BD
 
 para ejecutar: python3 Pre-procesamiento.py
+
