@@ -7,6 +7,8 @@ import os
 
 if os.path.exists("Resultados") is False:
     os.mkdir("Resultados")
+if os.path.exists("Graph") is False:
+    os.mkdir("Graph")
 
 train502 = open('Resultados/train502.txt', 'a')
 train504 = open('Resultados/train504.txt', 'a')
@@ -20,22 +22,53 @@ prior106 = open('Resultados/prior106.txt', 'a')
 prior108 = open('Resultados/prior108.txt', 'a')
 prior110 = open('Resultados/prior110.txt', 'a')
 
+soporte_train = []
+tiempo_train = []
+soporte_prior = []
+tiempo_prior = []
+bandera = 0#se usa para saber si es train o prior
+bandera_grafico = 0#se usa para saber que grafico se hace train o prior
+
 def Supp_Time(_arch, _tabla, items, supp):
+    global soporte_train
+    global tiempo_train
+    global soporte_prior
+    global tiempo_prior
+    global bandera
     star_time = datetime.datetime.now()
-    #print(star_time)
     patrones = pyfpgrowth.find_frequent_patterns(_tabla, items)
     fpass = pyfpgrowth.generate_association_rules(patrones, supp)
     end_time = datetime.datetime.now()
-    #print(end_time)
     total = end_time - star_time
-    #print(fpass)
-    _arch.write(str(total)+"\n"+str(supp)+"\n")
+    segundos =(total).total_seconds() #se tiene tiempo en segundos
+    minutos = segundos/60 #se tiene tiempo en minutos
+    _arch.write(str(total)+" "+str(supp)+" "+str(segundos)+" "+str(minutos)+"\n")
+    if bandera<5:
+        soporte_train.append(supp)
+        tiempo_train.append(minutos)
+    else:
+        soporte_prior.append(supp)
+        tiempo_prior.append(minutos)
+    bandera = bandera + 1
     return fpass
 
 def Guardar(_arch, tabla):
     for k,v in tabla.items():
         _arch.write(str(k)+str(v)+"\n")
 
+def Generar_Grafico(_supp, _time):
+    x_val = [x for x in _supp]
+    y_val = [y for y in _time]
+
+    plt.plot(x_val,y_val)
+    plt.plot(x_val,y_val,'or')
+    plt.title("Tiempo vs Soporte")
+    if bandera_grafico == 0:
+        plt.savefig('Graph/GraficoTrain.png')
+    else:
+        plt.savefig('Graph/GraficoPrior.png')
+    plt.show()
+    bandera_grafico = bandera_grafico + 1
 
 print("inicio " + str(datetime.datetime.now()))
 order_products_train = pd.read_csv('BD/order_products__train.csv', sep=',')
@@ -120,3 +153,6 @@ Guardar(prior110, datos)
 del datos
 print("fin supp 1.0\n")
 print("termino prior " + str(datetime.datetime.now()))
+
+Generar_Grafico(soporte_train, tiempo_train)
+Generar_Grafico(soporte_prior, tiempo_prior)
