@@ -4,6 +4,7 @@ import datetime
 import time
 from random import randrange
 import os
+import matplotlib.pyplot as plt
 
 if os.path.exists("Resultados") is False:
     os.mkdir("Resultados")
