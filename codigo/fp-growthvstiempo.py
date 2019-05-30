@@ -26,7 +26,7 @@ soporte_train = []
 tiempo_train = []
 soporte_prior = []
 tiempo_prior = []
-bandera = 0#se usa para saber si es train o prior
+bandera_TS = 0#se usa para saber si es train o prior
 bandera_grafico = 0#se usa para saber que grafico se hace train o prior
 
 def Supp_Time(_arch, _tabla, items, supp):
@@ -43,13 +43,13 @@ def Supp_Time(_arch, _tabla, items, supp):
     segundos =(total).total_seconds() #se tiene tiempo en segundos
     minutos = segundos/60 #se tiene tiempo en minutos
     _arch.write(str(total)+" "+str(supp)+" "+str(segundos)+" "+str(minutos)+"\n")
-    if bandera<5:
+    if bandera_TS<5:
         soporte_train.append(supp)
         tiempo_train.append(minutos)
     else:
         soporte_prior.append(supp)
         tiempo_prior.append(minutos)
-    bandera = bandera + 1
+    bandera_TS = bandera_TS + 1
     return fpass
 
 def Guardar(_arch, tabla):
@@ -57,6 +57,7 @@ def Guardar(_arch, tabla):
         _arch.write(str(k)+str(v)+"\n")
 
 def Generar_Grafico(_supp, _time):
+    global bandera_grafico
     x_val = [x for x in _supp]
     y_val = [y for y in _time]
 
