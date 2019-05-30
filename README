@@ -1,5 +1,7 @@
 ﻿mlxtend pip install mlxtend
 
+tener instalado pyfpgrowth
+
 pandas pip install pandas
 
 apyori pip install apyori
