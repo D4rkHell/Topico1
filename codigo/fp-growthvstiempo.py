@@ -76,7 +76,7 @@ print("inicio " + str(datetime.datetime.now()))
 order_products_train = pd.read_csv('BD/order_products__train.csv', sep=',')
 products = pd.read_csv('BD/products.csv', sep=',')
 print("cargo csv\n")
-Tabla_Comp_Train = TablaCompra(products, order_products_train)
+Tabla_Comp_Train = TablaCompra(order_products_train)
 print("genera compra\n")
 
 print("elimino csv train\n")
@@ -122,7 +122,7 @@ print("comienza prior" + str(datetime.datetime.now()))
 order_products_prior = pd.read_csv('BD/order_products__prior.csv', sep=',')
 products = pd.read_csv('BD/products.csv', sep=',')
 print("cargo csv\n")
-Tabla_Comp_Prior = TablaCompra(products, order_products_prior)
+Tabla_Comp_Prior = TablaCompra(order_products_prior)
 del order_products_prior
 
 prior1 = []

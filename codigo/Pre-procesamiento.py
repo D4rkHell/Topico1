@@ -140,7 +140,7 @@ del orders_eli
 del products_eli
 
 Archivo_2D_Apriori = open('Archivos/Archivo_2D_Apriori', 'a')
-Tabla_Comp_Train = TablaCompra(products, order_products_train)
+Tabla_Comp_Train = TablaCompra(order_products_train)
 Archivo_2D_Apriori.write(str(Apriori(Tabla_Comp_Train, Archivo_2D_Apriori)))
 Archivo_2D_Apriori.close()
 

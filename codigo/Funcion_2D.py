@@ -17,7 +17,7 @@ def Apriori(_csv, _Archivo):
         _Archivo.write("=====================================\n")
         i=i+1
 
-def TablaCompra(_product, _csv):
+def TablaCompra(_csv):
     table = []
     w = 0
     x = 0
