@@ -64,7 +64,7 @@ def Generar_Grafico(_supp, _time):
 
     plt.plot(x_val,y_val)
     plt.plot(x_val,y_val,'or')
-    plt.title("Tiempo vs Soporte")
+    plt.title("Tiempo(minutos) vs Soporte")
     if bandera_grafico == 0:
         plt.savefig('Graph/GraficoTrain.png')
     else:
